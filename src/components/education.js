@@ -13,8 +13,8 @@ export default class Education extends React.Component {
           id: 0,
         },
         {
-          startDate: "",
-          endDate: "",
+          startDate: "1999",
+          endDate: "2003",
           institution: "Valley View High School",
           city: "Archbald, PA",
           detail: "",
