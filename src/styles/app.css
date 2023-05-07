@@ -9,6 +9,9 @@ body {
   margin: 10px;
   display: flex;
   justify-content: center;
+  background-size: cover;
+  background-position: bottom;
+  background-image: url(../pictures/background.avif);
   background-color: black;
 }
 #root > div {
@@ -19,9 +22,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 60px;
+  padding: 50px 70px;
   position: relative;
-  gap: 20px;
+  gap: 25px;
 }
 button#edit-save {
   background-color: rgb(8, 124, 201);
@@ -67,6 +70,7 @@ button#edit-save.save {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 95px;
 }
 #general.edit {
   gap: 3px;
@@ -87,7 +91,7 @@ button#edit-save.save {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 label {
   font-weight: bold;
