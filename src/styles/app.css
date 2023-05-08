@@ -14,30 +14,41 @@ body {
   background-image: url(../pictures/background.avif);
   background-color: black;
 }
-#root > div {
+#root > div > div {
   box-sizing: border-box;
-  background-color: white;
-  width: 850px;
-  min-height: 1050px;
+  background-color: #fafafa;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px 70px;
-  position: relative;
   gap: 25px;
 }
-button#edit-save {
+#root > div {
+  position: relative;
+}
+#cv {
+  width: 210mm;
+  min-height: 297mm;
+  margin-left: auto;
+  margin-right: auto;
+}
+button#edit-save,
+button#download {
   background-color: rgb(8, 124, 201);
   border: none;
   padding: 10px 40px;
-  width: 150px;
+  width: 170px;
   border-radius: 7px;
   color: rgb(255, 255, 255);
   font-weight: bold;
   font-size: 1.25rem;
   position: absolute;
   top: 50px;
-  right: -180px;
+  right: -250px;
+}
+button#download {
+  background-color: palevioletred;
+  top: 100px;
 }
 button#edit-save.save {
   background-color: green;
