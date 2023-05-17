@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Education from "./components/education";
 import Experience from "./components/experience";
 import General from "./components/general";
@@ -6,29 +6,21 @@ import Skills from "./components/skills";
 import "./styles/app.css";
 import * as html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { mode: "saved" };
-    this.toggleMode = this.toggleMode.bind(this);
-    this.handleEditBtnClick = this.handleEditBtnClick.bind(this);
-    this.printDocument = this.printDocument.bind(this);
+export default function App() {
+  const [mode, setMode] = useState("saved");
+  function handleEditBtnClick(e) {
+    toggleEditBtn(e.target);
+    toggleMode();
   }
-  handleEditBtnClick(e) {
-    this.toggleEditBtn(e.target);
-    this.toggleMode();
+  function toggleMode() {
+    if (mode === "saved") setMode("edit");
+    else setMode("saved");
   }
-  toggleMode() {
-    this.setState((state) => {
-      if (state.mode === "saved") return { mode: "edit" };
-      else return { mode: "saved" };
-    });
-  }
-  toggleEditBtn(btn) {
+  function toggleEditBtn(btn) {
     btn.textContent = btn.textContent === "SAVE" ? "EDIT" : "SAVE";
     btn.className = btn.className === "save" ? "edit" : "save";
   }
-  printDocument() {
+  function printDocument() {
     const input = document.getElementById("cv");
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
@@ -38,26 +30,24 @@ export default class App extends React.Component {
       pdf.save("download.pdf");
     });
   }
-  render() {
-    return (
-      <div>
-        <button
-          id="edit-save"
-          className="saved"
-          onClick={(e) => this.handleEditBtnClick(e)}
-        >
-          EDIT
-        </button>
-        <button id="download" onClick={this.printDocument}>
-          Download PDF
-        </button>
-        <div id="cv">
-          <General mode={this.state.mode}></General>
-          <Education mode={this.state.mode}></Education>
-          <Experience mode={this.state.mode}></Experience>
-          <Skills mode={this.state.mode}></Skills>
-        </div>
+  return (
+    <div>
+      <button
+        id="edit-save"
+        className="saved"
+        onClick={(e) => handleEditBtnClick(e)}
+      >
+        EDIT
+      </button>
+      <button id="download" onClick={printDocument}>
+        Download PDF
+      </button>
+      <div id="cv">
+        <General mode={mode}></General>
+        <Education mode={mode}></Education>
+        <Experience mode={mode}></Experience>
+        <Skills mode={mode}></Skills>
       </div>
-    );
-  }
+    </div>
+  );
 }
