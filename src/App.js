@@ -4,7 +4,6 @@ import Experience from "./components/experience";
 import General from "./components/general";
 import Skills from "./components/skills";
 import "./styles/app.css";
-import * as html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 export default function App() {
   const [mode, setMode] = useState("saved");
@@ -21,13 +20,16 @@ export default function App() {
     btn.className = btn.className === "save" ? "edit" : "save";
   }
   function printDocument() {
-    const input = document.getElementById("cv");
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, "JPEG", 0, 0);
-      pdf.output("dataurlnewwindow");
-      pdf.save("download.pdf");
+    const doc = new jsPDF();
+    const elementHTML = document.querySelector("#cv");
+    doc.html(elementHTML, {
+      callback: function (doc) {
+        doc.save("sample-document.pdf");
+      },
+      x: 20,
+      y: 20,
+      width: 170, //target width in the PDF document
+      windowWidth: 794, //window width in CSS pixels
     });
   }
   return (

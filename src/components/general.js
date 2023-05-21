@@ -2,6 +2,7 @@ import React, { useState } from "react";
 export default function General(props) {
   const [fullName, setFullName] = useState("Pam Halpert");
   const [address, setAddress] = useState("383 Linden Avenue, Scranton, PA");
+  const [website, setWebsite] = useState(null);
   const [mail, setMail] = useState("pambeesly@dundermifflin.com");
   const [phone, setPhone] = useState("(570) 555-0148");
   function updateName(e) {
@@ -15,6 +16,9 @@ export default function General(props) {
   }
   function updatePhone(e) {
     setPhone(e.target.value);
+  }
+  function updateWebsite(e) {
+    setWebsite(e.target.value);
   }
   if (props.mode === "edit") {
     return (
@@ -46,6 +50,15 @@ export default function General(props) {
             onChange={(e) => updateMail(e)}
           ></input>
         </label>
+        <label htmlFor="website">
+          Website
+          <input
+            type="text"
+            id="website"
+            defaultValue={website}
+            onChange={(e) => updateWebsite(e)}
+          ></input>
+        </label>
         <label htmlFor="phone">
           Phone Number
           <input
@@ -63,6 +76,7 @@ export default function General(props) {
         <h1>{fullName}</h1>
         <p>{address}</p>
         <p>{mail}</p>
+        <p>{website}</p>
         <p>{phone}</p>
       </div>
     );
